@@ -1,49 +1,57 @@
 from dataclasses import dataclass
 
 
-@dataclass(frozen=True)
+@dataclass()
 class NegativeEmotions:
     name: str
     emoji: str
     strength: int
+    description: str
 
 
-@dataclass(frozen=True)
+@dataclass()
 class NegativeThought:
     name: str
     emotions: list[NegativeEmotions]
+    description: str
 
 
-@dataclass(frozen=True)
+@dataclass()
 class CalmingTechnique:
     name: str
     duration: int
+    related_negative_emotions: list[NegativeEmotions]
 
 
-@dataclass(frozen=True)
+@dataclass()
 class PositiveEmotions:
     name: str
     emoji: str
     strength: int
+    description: str
+    related_calming_techniques: list[CalmingTechnique] = None
 
 
-@dataclass(frozen=True)
+@dataclass()
 class PositiveThought:
     name: str
     emotions: list[PositiveEmotions]
+    description: str
 
 
-@dataclass(frozen=True)
-class Event:
-    name: str
-    date: str
-    negative_emotions: list[NegativeEmotions] = None
-    positive_emotions: list[PositiveEmotions] = None
-
-
-@dataclass(frozen=True)
+@dataclass()
 class Person:
     name: str
     surname: str
     gender: str
-    events: list[Event]
+    events: list['Event'] = None
+
+
+@dataclass()
+class Event:
+    name: str
+    date: str
+    person: Person
+    negative_emotions: list['NegativeEmotions'] = None
+    positive_emotions: list['PositiveEmotions'] = None
+    calm: 'CalmingTechnique' = None

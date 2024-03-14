@@ -10,10 +10,17 @@ if __name__ == '__main__':
     neg_th_repos = NegativeThoughtRepository()
     calm_repos = CalmingTechniqueRepository()
 
+    person_repos.save_item(Person(name='pipa', surname='pipa', gender='woman'))
+
+
     event_repos.save_item(Event(
         name='event',
         date='12.11.2023',
-        negative_emotions=[NegativeEmotions(name='sad', strength=9, emoji=':(')]
+        person=person_repos.get_item(0),
+        negative_emotions=[
+            NegativeEmotions(name='sad', strength=9, emoji=':(', description='(((((( очень грустно)(((((((')],
+
     ))
+
 
     print(event_repos.get_item(0))
